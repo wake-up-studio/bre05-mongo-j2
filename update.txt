@@ -1,0 +1,67 @@
+pass : 9aNuR8ENpfMrDAYW
+
+1.
+    db.inventory.updateMany(
+        { status : {$in : ["C", "D"]}
+        },
+        {$mul: {qty: 1.5}}
+    );
+
+2.
+    db.inventory.updateMany(
+        { status : {$in : ["A", "B"]},
+        tags : {$exists : "tags.1"}
+        },
+        {$mul: {qty: 2.5}}
+    );
+
+3.
+    1.
+        db.inventory.updateMany(
+            { qty : {$gte : 75}
+            },
+            {$set: {scores : [19]}},
+        ); 
+    
+    2.
+        db.inventory.updateMany(
+            {society : /^.*[aA].*$/
+            },
+            {$push: {scores : 11}},
+        );
+    
+    3.
+        db.inventory.find(
+            {scores : 11
+            },
+            {society : 1, _id : 0, scores : 1}
+        );        
+    
+    4.
+        db.inventory.updateMany(
+            {society : "Alex"
+            },
+            {$set: {comment : "Hello Alex"}},
+        );
+    
+    5.
+        db.inventory.find(
+            {comment : {$exists : false}
+            },
+            {society : 1, _id : 0}
+        );   
+        
+4.
+    1.
+        db.inventory.find(
+            {level : {$exists : true}
+            },
+            {_id: 1, society: 1, level: 1}
+        );
+        
+    2.  db.inventory.updateOne(
+        {level : {$exists : true}
+        },
+        {$unset : {level : ""}}
+    );
+

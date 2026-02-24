@@ -1,0 +1,16 @@
+1.
+    db.inventory.updateMany(
+        {tags : {$exists : true}},
+        {$set :
+            { label :
+                { $switch :
+                   { branches : [
+                        {case : {tags : {$exists : 3 }}, then : "AA"},
+                        {case : {tags : {$exists : 1 }}, then : "A"},
+                    ],
+                    default : "B"
+                    }   
+                }   
+            }
+        }
+    );
